@@ -5,7 +5,7 @@ import os
 while(True):
     userin = input("Name of Folder: ")
 
-    if(userin == "exit"):
+    if(userin == "q"):
         break
 
     path1 = "/Users/bananam/PycharmProjects/tensorENV/DOTA/Simple-Whiskey-Image-Classifier-Python/photos/"
@@ -15,7 +15,7 @@ while(True):
     path2 = path2 + userin + "/"
 
     if not os.path.exists(path1):
-        os.makedirs(path1)
+        break
 
     if not os.path.exists(path2):
         os.makedirs(path2)
