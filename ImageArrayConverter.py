@@ -5,7 +5,8 @@ import cv2
 import random
 import pickle
 
-Data_directory = "/Users/bananam/PycharmProjects/tensorENV/DOTA/Simple-Whiskey-Image-Classifier-Python/Resized/"
+dirname = os.path.dirname(__file__)
+Data_directory = os.path.join(dirname, "processed/Resized/")
 
 # All the categories the NN can detect
 categories = ["Hakushu12", "Hibiki", "Yamazaki12"]

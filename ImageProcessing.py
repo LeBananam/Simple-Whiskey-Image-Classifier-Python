@@ -2,6 +2,8 @@ import PIL
 from PIL import Image
 import os
 
+dirname = os.path.dirname(__file__)
+
 while True:
     userin = input("Name of Folder: ")
 
@@ -10,8 +12,8 @@ while True:
 
     # Path of input folder and output
 
-    path1 = "/Users/bananam/PycharmProjects/tensorENV/DOTA/Simple-Whiskey-Image-Classifier-Python/photos/"
-    path2 = "/Users/bananam/PycharmProjects/tensorENV/DOTA/Simple-Whiskey-Image-Classifier-Python/Resized/"
+    path1 = os.path.join(dirname, "photos/")
+    path2 = os.path.join(dirname, "processed/")
 
     path1 = path1 + userin + "/"
     path2 = path2 + userin + "/"

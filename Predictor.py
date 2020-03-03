@@ -1,6 +1,10 @@
 import cv2
 import tensorflow as tf
 import numpy as np
+import os
+
+dirname = os.path.dirname(__file__)
+filename = os.path.join(dirname, "Data/CNN.model")
 
 categories = ["Hakushu12", "Hibiki", "Yamazaki12"]
 
@@ -11,7 +15,7 @@ def preparePrediction(file):
     new_array = cv2.resize(img_array, (imgsize, imgsize))
     return new_array.reshape(-1, imgsize, imgsize, 1)
 
-model = tf.keras.models.load_model("/Users/bananam/PycharmProjects/tensorENV/DOTA/Simple-Whiskey-Image-Classifier-Python/Data/CNN.model")
+model = tf.keras.models.load_model(filename)
 
 
 # Ask for user input of test path

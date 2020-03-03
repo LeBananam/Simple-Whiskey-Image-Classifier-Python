@@ -52,8 +52,8 @@ history = model.fit(x, y, batch_size=32, epochs=35, validation_split=0.1)
 
 # Saving the model as JSON and .model
 model_json = model.to_json()
-with open("modeljson.json", "w") as file:
+with open("Data/modeljson.json", "w") as file:
     file.write(model_json)
-model.save_weights("modelweight.h5")
-model.save('CNN.model')
+model.save_weights("Data/modelweight.h5")
+model.save("Data/CNN.model")
 
