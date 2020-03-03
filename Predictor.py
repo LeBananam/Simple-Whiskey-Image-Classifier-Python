@@ -2,6 +2,7 @@ import cv2
 import tensorflow as tf
 import numpy as np
 import os
+import shutil
 
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, "Data/CNN.model")
@@ -36,3 +37,17 @@ while True:
     prediction = model.predict([image])
     prediction = list(prediction[0])
     print(categories[prediction.index(max(prediction))])
+
+    print("Correct? Y/N")
+    useryn = input()
+    useryn = useryn.upper()
+    if useryn == "N":
+        print("Answer is?")
+        userresponse = input()
+
+        destination = os.path.join(dirname, "photos/", userresponse)
+        if not os.path.exists(destination):
+            print("No category found!")
+            break
+
+        shutil.copy(userinput, destination)
