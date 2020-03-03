@@ -21,6 +21,7 @@ model = tf.keras.models.load_model(filename)
 while True:
     # Ask for user input of test path
     userinput = input("Enter image path: ")
+    userinput = userinput.strip()
     image = userinput
 
     if userinput=="q":
