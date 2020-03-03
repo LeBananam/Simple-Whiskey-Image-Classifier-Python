@@ -11,7 +11,7 @@ while True:
     # Path of input folder and output
 
     path1 = "/Users/bananam/PycharmProjects/tensorENV/DOTA/Simple-Whiskey-Image-Classifier-Python/photos/"
-    path2 = "/Users/bananam/PycharmProjects/tensorENV/DOTA/Simple-Whiskey-Image-Classifier-Python/Resized/Resized/"
+    path2 = "/Users/bananam/PycharmProjects/tensorENV/DOTA/Simple-Whiskey-Image-Classifier-Python/Resized/"
 
     path1 = path1 + userin + "/"
     path2 = path2 + userin + "/"
