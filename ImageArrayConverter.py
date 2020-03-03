@@ -8,7 +8,7 @@ import csv
 
 new_list = []
 results_list = []
-namestonumber = {"Hakushu12":0, "Hibiki":1, "Yamazaki12":2 }
+namestonumber = {"Hakushu12": 0, "Hibiki": 1, "Yamazaki12": 2}
 
 while(True):
     userin = input("Name of Folder to Put in Array: ")
@@ -35,7 +35,7 @@ while(True):
             print(path1 + file)
             im = Image.open(path1 + file)
 
-            data = asarray(im)
+            data = np.array(im)
 
             new_list.append(data)
             results_list.append(namestonumber[userin])
