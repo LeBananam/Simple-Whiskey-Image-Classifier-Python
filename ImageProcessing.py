@@ -13,7 +13,7 @@ while True:
     # Path of input folder and output
 
     path1 = os.path.join(dirname, "photos/")
-    path2 = os.path.join(dirname, "processed/")
+    path2 = os.path.join(dirname, "processed/Resized/")
 
     path1 = path1 + userin + "/"
     path2 = path2 + userin + "/"

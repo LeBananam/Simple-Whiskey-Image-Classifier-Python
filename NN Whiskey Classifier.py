@@ -3,6 +3,7 @@ import numpy as np
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
 import pickle
+from keras.regularizers import l2
 from keras.models import model_from_json
 from keras.models import load_model
 import matplotlib.pyplot as plt
@@ -15,6 +16,8 @@ y = pickle.load(open("Data/y.pickle", "rb"))
 # normalizing data
 x = np.asarray(x) / 255.0
 y = np.asarray(y)
+
+#weight_regularizer = 0.5
 
 # Building the model
 model = Sequential()
@@ -40,15 +43,15 @@ model.add(Activation("relu"))
 model.add(Dense(128))
 model.add(Activation("relu"))
 
-# The output layer with 3 neurons, for 3 classes
-model.add(Dense(3))
+# The output layer with 5 neurons, for 5 classes
+model.add(Dense(5))
 model.add(Activation("softmax"))
 
 # Compiling the model using some basic parameters
 model.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # validation_split corresponds to the percentage of images used for the validation phase compared to all the images
-history = model.fit(x, y, batch_size=32, epochs=35, validation_split=0.1)
+history = model.fit(x, y, batch_size=32, epochs=40, validation_split=0.1)
 
 # Saving the model as JSON and .model
 model_json = model.to_json()

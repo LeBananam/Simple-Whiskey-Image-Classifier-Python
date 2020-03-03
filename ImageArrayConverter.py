@@ -9,7 +9,7 @@ dirname = os.path.dirname(__file__)
 Data_directory = os.path.join(dirname, "processed/Resized/")
 
 # All the categories the NN can detect
-categories = ["Hakushu12", "Hibiki", "Yamazaki12"]
+categories = ["Hakushu12", "Hibiki", "Yamazaki12", "Toki", "NikkaFTB"]
 
 # Define data creation method
 training_data = []

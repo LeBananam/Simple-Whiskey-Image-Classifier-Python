@@ -6,7 +6,7 @@ import os
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, "Data/CNN.model")
 
-categories = ["Hakushu12", "Hibiki", "Yamazaki12"]
+categories = ["Hakushu12", "Hibiki", "Yamazaki12", "Toki", "NikkaFTB"]
 
 # Creating method to process input image
 def preparePrediction(file):
@@ -18,15 +18,20 @@ def preparePrediction(file):
 model = tf.keras.models.load_model(filename)
 
 
-# Ask for user input of test path
-userinput = input("Enter image path: ")
-image = userinput
+while True:
+    # Ask for user input of test path
+    userinput = input("Enter image path: ")
+    image = userinput
 
-# Process input image adn normalize
-image = preparePrediction(image)
-image = np.asarray(image) / 255.0
+    if userinput=="q":
+        break
 
-# Make predictions and print
-prediction = model.predict([image])
-prediction = list(prediction[0])
-print(categories[prediction.index(max(prediction))])
+
+    # Process input image adn normalize
+    image = preparePrediction(image)
+    image = np.asarray(image) / 255.0
+
+    # Make predictions and print
+    prediction = model.predict([image])
+    prediction = list(prediction[0])
+    print(categories[prediction.index(max(prediction))])
