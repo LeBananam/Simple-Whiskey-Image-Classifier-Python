@@ -33,3 +33,4 @@ Step 4: Creation of CNN, model and training NN_Whiskey_Classifier.py
 
 Step 5: 
 - Images can now be predicted. User just need to run Predictor.py and put the path of the query image in to get prediction result.
+- Images with wrong prediction will be prompted to add to dataset to relearn.
