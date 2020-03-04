@@ -1,5 +1,5 @@
 # Simple-Whiskey-Image-Classifier-Python
-A simple image classifier made in Python using Tensorflow and Keras to identify and distinguish between 3 Japanese Whiskey bottles with CNN architecture.
+A simple image classifier made in Python using Tensorflow and Keras to identify and distinguish between 5 Japanese Whiskey bottles (Yamazaki12, Hakushu12, Hibiki, Toki, NikkaFTB) with CNN architecture.
 
 The plugins used for this project are:
 - CV2
