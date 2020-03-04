@@ -7,7 +7,7 @@ import PIL
 from PIL import Image
 from ImageProcessing import Relearn1
 from ImageArrayConverter import Relearn2
-from NNWhiskey import Relearn3
+from NNWhiskey import Relearn3, Relearn4
 
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, "Data/CNN.model")
@@ -16,7 +16,7 @@ categories = ["Hakushu12", "Hibiki", "Yamazaki12", "Toki", "NikkaFTB"]
 
 # Creating method to process input image
 def preparePrediction(file):
-    imgsize = 50
+    imgsize = 100
     img_array = cv2.imread(file, cv2.IMREAD_GRAYSCALE)
     new_array = cv2.resize(img_array, (imgsize, imgsize))
     return new_array.reshape(-1, imgsize, imgsize, 1)
@@ -28,8 +28,36 @@ while relearnqry != "Y" and relearnqry != "N":
     relearnqry = input("Retrain model? Y/N \n")
     relearnqry = relearnqry.upper()
 if relearnqry == "Y":
-    Relearn1()
-    Relearn2()
+    """
+    userinres = input("Resolution: \n")
+    try:
+        userinres = int(userinres)
+    except ValueError:
+        pass
+    while not isinstance(userinres, int):
+        userinres = input("Resolution: \n")
+        try:
+            userinres = int(userinres)
+        except ValueError:
+            pass
+    Relearn1(int(userinres/2))
+    Relearn2(int(userinres/2))
+    Relearn3()
+    Relearn4(userinres)
+    """
+    userinres = input("Resolution: \n")
+    try:
+        userinres = int(userinres)
+    except ValueError:
+        pass
+    while not isinstance(userinres, int):
+        userinres = input("Resolution: \n")
+        try:
+            userinres = int(userinres)
+        except ValueError:
+            pass
+    Relearn1(userinres)
+    Relearn2(userinres)
     Relearn3()
 
 model = tf.keras.models.load_model(filename)

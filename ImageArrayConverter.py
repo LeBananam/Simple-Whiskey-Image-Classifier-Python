@@ -12,9 +12,9 @@ Data_directory = os.path.join(dirname, "processed/Resized/")
 categories = ["Hakushu12", "Hibiki", "Yamazaki12", "Toki", "NikkaFTB"]
 
 #Relearning
-def Relearn2():
+def Relearn2(res):
     # Creating data
-    create_data()
+    training_data = create_data()
     random.shuffle(training_data)
 
     # Dividing data into labels and training data
@@ -24,7 +24,7 @@ def Relearn2():
         x.append(trainingdat)
         y.append(labels)
 
-    x = np.array(x).reshape(-1, 50, 50, 1)
+    x = np.array(x).reshape(-1, res, res, 1)
     # Creating pickle for training data
     pickle_out = open("Data/x.pickle", "wb")
     pickle.dump(x, pickle_out)
@@ -36,8 +36,8 @@ def Relearn2():
     pickle_out.close()
 
 # Define data creation method
-training_data = []
 def create_data():
+    training_data = []
     for categor in categories :
         path = os.path.join(Data_directory, categor)
         class_num = categories.index(categor)
@@ -46,6 +46,19 @@ def create_data():
                 img_array = cv2.imread(os.path.join(path, img), cv2.IMREAD_GRAYSCALE)
                 training_data.append([img_array, class_num])
 
+    return training_data
+
 
 if __name__ == "__main__":
-    Relearn2()
+    userinres = input("Resolution: \n")
+    try:
+        userinres = int(userinres)
+    except ValueError:
+        pass
+    while not isinstance(userinres, int):
+        userinres = input("Resolution: \n")
+        try:
+            userinres = int(userinres)
+        except ValueError:
+            pass
+    Relearn2(userinres)

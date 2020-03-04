@@ -8,10 +8,9 @@ dirname = os.path.dirname(__file__)
 Data_directory = os.path.join(dirname, "photos/")
 
 augment = True
-desired_image_size = 50
 
 # Pad and Resize function
-def padnresize(im):
+def padnresize(im, desired_image_size):
     old_size = im.size
 
     ratio = float(desired_image_size) / max(old_size)
@@ -25,8 +24,9 @@ def padnresize(im):
 
     return new_im
 
-def Relearn1():
-    print("adsads")
+def Relearn1(res):
+    desired_image_size = res
+
     categories = ["Hakushu12", "Hibiki", "Yamazaki12", "Toki", "NikkaFTB"]
 
     # For each category folder
@@ -43,7 +43,7 @@ def Relearn1():
                     print(path + file)
                     im = Image.open(path + "/" + file).convert("RGB")
 
-                    new_im = padnresize(im)
+                    new_im = padnresize(im, res)
 
                     new_im.save(path2 + file, "JPEG")
 
@@ -55,19 +55,19 @@ def Relearn1():
 
                         file = file + "flip.JPEG"
                         new_im = ImageOps.flip(im)
-                        new_im = padnresize(new_im)
+                        new_im = padnresize(new_im, res)
                         new_im.save(path2 + file, "JPEG")
 
                         file = file + "rotateleft.JPEG"
                         rotationangle = 45
                         new_im = im.rotate(rotationangle, expand=False)
-                        new_im = padnresize(new_im)
+                        new_im = padnresize(new_im, res)
                         new_im.save(path2 + file, "JPEG")
 
                         file = file + "rotateright.JPEG"
                         rotationangle = -45
                         new_im = im.rotate(rotationangle, expand=False)
-                        new_im = padnresize(new_im)
+                        new_im = padnresize(new_im, res)
                         new_im.save(path2 + file, "JPEG")
 
 if __name__ == "__main__":
@@ -76,6 +76,18 @@ if __name__ == "__main__":
 
         if userin == "q":
             break
+
+        userinres = input("Resolution: \n")
+        try:
+            userinres = int(userinres)
+        except ValueError:
+            pass
+        while not isinstance(userinres, int):
+            userinres = input("Resolution: \n")
+            try:
+                userinres = int(userinres)
+            except ValueError:
+                pass
 
         # Path of input folder and output
 
@@ -100,7 +112,7 @@ if __name__ == "__main__":
                 print(path1 + file)
                 im = Image.open(path1 + file).convert("RGB")
 
-                new_im = padnresize(im)
+                new_im = padnresize(im, userinres)
 
                 new_im.save(path2 + file, "JPEG")
 
@@ -113,18 +125,18 @@ if __name__ == "__main__":
 
                     file = file + "flip.JPEG"
                     new_im = ImageOps.flip(im)
-                    new_im = padnresize(new_im)
+                    new_im = padnresize(new_im, userinres)
                     new_im.save(path2 + file, "JPEG")
 
 
                     file = file + "rotateleft.JPEG"
                     rotationangle = 45
                     new_im = im.rotate(rotationangle, expand=False)
-                    new_im = padnresize(new_im)
+                    new_im = padnresize(new_im, userinres)
                     new_im.save(path2 + file, "JPEG")
 
                     file = file + "rotateright.JPEG"
                     rotationangle = -45
                     new_im = im.rotate(rotationangle, expand=False)
-                    new_im = padnresize(new_im)
+                    new_im = padnresize(new_im, userinres)
                     new_im.save(path2 + file, "JPEG")
