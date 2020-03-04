@@ -25,7 +25,7 @@ def padnresize(im):
     return new_im
 
 while True:
-    userin = input("Name of Folder: ")
+    userin = input("Name of Folder: \n")
 
     if userin == "q":
         break

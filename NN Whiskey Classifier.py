@@ -52,7 +52,7 @@ model.add(Activation("softmax"))
 model.compile(loss="sparse_categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # validation_split corresponds to the percentage of images used for the validation phase compared to all the images
-history = model.fit(x, y, batch_size=50, epochs=55, validation_split=0.075)
+history = model.fit(x, y, batch_size=50, epochs=55, validation_split=0.05)
 
 # Saving the model as JSON and .model
 model_json = model.to_json()
