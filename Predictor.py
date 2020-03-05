@@ -7,10 +7,11 @@ import PIL
 from PIL import Image
 from ImageProcessing import Relearn1
 from ImageArrayConverter import Relearn2
-from NNWhiskey import Relearn3, Relearn4
+from NNWhiskey import Relearn3, Relearn4, Autoencoder
 
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, "Data/CNN.model")
+filenameauto = os.path.join(dirname, "Data/CNNauto.model")
 
 categories = ["Hakushu12", "Hibiki", "Yamazaki12", "Toki", "NikkaFTB"]
 
@@ -56,11 +57,29 @@ if relearnqry == "Y":
             userinres = int(userinres)
         except ValueError:
             pass
+    """
+    modeltype = input("Model Type: \n")
+    modeltype = modeltype.upper()
+    while modeltype != "CNN" and modeltype != "AEN":
+        modeltype = input("Model Type: \n")
+        modeltype = modeltype.upper()
+    if modeltype == "CNN":
+        Relearn1(userinres)
+        Relearn2(userinres)
+        Relearn3()
+        model = tf.keras.models.load_model(filename)
+    else:
+        Relearn1(userinres)
+        Relearn2(userinres)
+        Autoencoder()
+        model = tf.keras.models.load_model(filenameauto)
+    """
+    
     Relearn1(userinres)
     Relearn2(userinres)
     Relearn3()
+    model = tf.keras.models.load_model(filename)
 
-model = tf.keras.models.load_model(filename)
 
 if __name__ == "__main__":
     while True:

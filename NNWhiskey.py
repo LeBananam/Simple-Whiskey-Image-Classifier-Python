@@ -3,7 +3,7 @@ import numpy as np
 from tensorflow import keras
 from tensorflow.keras.optimizers import RMSprop
 from tensorflow.keras.models import Sequential, Model
-from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D
+from tensorflow.keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D, Input, UpSampling2D
 import pickle
 from tensorflow.keras.regularizers import l1
 from keras.models import model_from_json
@@ -45,6 +45,47 @@ def change_model(model, res):
             print("Could not transfer weights for layer {}".format(layer.name))
 
     return new_model
+
+# Autoencoder Test
+def Autoencoder():
+    # Load pickle model
+    a = pickle.load(open("Data/x.pickle", "rb"))
+    b = pickle.load(open("Data/y.pickle", "rb"))
+
+    # normalizing data
+    a = np.asarray(a) / 255.0
+    b = np.asarray(b)
+
+    input_img = Input(shape=a.shape[1:])  # adapt this if using `channels_first` image data format
+
+    x = Conv2D(32, (3, 3), activation='relu')(input_img)
+    x = MaxPooling2D((2, 2), padding='same')(x)
+    x = Conv2D(64, (3, 3), activation='relu')(x)
+    x = MaxPooling2D((2, 2), padding='same')(x)
+    x = Conv2D(64, (3, 3), activation='relu')(x)
+    encoded = MaxPooling2D((2, 2))(x)
+
+    # at this point the representation is (4, 4, 8) i.e. 128-dimensional
+
+    x = Conv2D(64, (3, 3), activation='relu')(encoded)
+    x = UpSampling2D((2, 2))(x)
+    x = Conv2D(64, (3, 3), activation='relu')(x)
+    x = UpSampling2D((2, 2))(x)
+    x = Conv2D(32, (3, 3), activation='relu')(x)
+    x = UpSampling2D((2, 2))(x)
+    decoded = Dense(5, activation='sigmoid')(x)
+
+    model = Model(input_img, decoded)
+    model.compile(optimizer='adam', loss="sparse_categorical_crossentropy")
+
+    print(a.shape)
+    print(b.shape)
+
+    model.fit(a, b, epochs=50, batch_size=50, shuffle=True, validation_split=0.05)
+
+    # Saving the model as .h5 and .model
+    model.save("Data/modelweightauto.h5")
+    model.save("Data/CNNauto.model")
 
 # Relearning
 def Relearn3():
@@ -97,7 +138,7 @@ def Relearn3():
     model.save("Data/modelweight.h5")
     model.save("Data/CNN.model")
 
-# CNN Progressive Resizing
+# CNN Progressive Resizing Test
 def Relearn4(res):
 
     Relearn1(res)
