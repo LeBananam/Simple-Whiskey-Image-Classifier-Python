@@ -15,7 +15,6 @@ import ImageArrayConverter
 from ImageProcessing import Relearn1
 from ImageArrayConverter import Relearn2
 import os
-from tfkerassurgeon.operations import delete_layer, insert_layer
 
 # Transfer weights from old to new model
 def change_model(model, res):
