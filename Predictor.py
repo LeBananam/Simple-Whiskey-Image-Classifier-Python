@@ -16,8 +16,8 @@ filenameauto = os.path.join(dirname, "Data/CNNauto.model")
 categories = ["Hakushu12", "Hibiki", "Yamazaki12", "Toki", "NikkaFTB"]
 
 # Creating method to process input image
-def preparePrediction(file):
-    imgsize = 100
+def preparePrediction(file, res):
+    imgsize = res
     img_array = cv2.imread(file, cv2.IMREAD_GRAYSCALE)
     new_array = cv2.resize(img_array, (imgsize, imgsize))
     return new_array.reshape(-1, imgsize, imgsize, 1)
@@ -79,7 +79,8 @@ if relearnqry == "Y":
     Relearn2(userinres)
     Relearn3()
     model = tf.keras.models.load_model(filename)
-
+else:
+    model = tf.keras.models.load_model(filename)
 
 if __name__ == "__main__":
     while True:
@@ -91,9 +92,8 @@ if __name__ == "__main__":
         if userinput=="q":
             break
 
-
         # Process input image adn normalize
-        image = preparePrediction(image)
+        image = preparePrediction(image, model.layers[0].input_shape[1])
         image = np.asarray(image) / 255.0
 
         # Make predictions and print
